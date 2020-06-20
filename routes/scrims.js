@@ -5,8 +5,10 @@ const Scrim = require("../models/scrims.models");
 
 // Get data on every scrim in database
 router.get("/", async (req, res) => {
+  console.log(req.query);
+  let params;
   try {
-    const scrims = await Scrim.find();
+    const scrims = await Scrim.find(req.query);
     res.json(scrims);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -38,12 +40,39 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Delete a scrim request by the id
 router.delete("/:id", getScrimByID, async (req, res) => {
   try {
     await res.scrim.remove();
     res.json({ message: "Deleted Scrim Data" });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+// Update scrim information
+router.patch("/:id", getScrimByID, async (req, res) => {
+  if (req.body.date != null) {
+    res.scrim.date = req.body.date;
+  }
+  if (req.body.startTime != null) {
+    res.scrim.startTime = req.body.startTime;
+  }
+  if (req.body.endTime != null) {
+    res.scrim.endTime = req.body.endTime;
+  }
+  if (req.body.elo != null) {
+    res.scrim.elo = req.body.elo;
+  }
+  if (req.body.region != null) {
+    res.scrim.region = req.body.region;
+  }
+
+  try {
+    const updatedScrim = await res.scrim.save();
+    res.json(updatedScrim);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
