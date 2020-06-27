@@ -5,8 +5,6 @@ const Scrim = require("../models/scrims.models");
 
 // Get data on every scrim in database
 router.get("/", async (req, res) => {
-  console.log(req.query);
-  let params;
   try {
     const scrims = await Scrim.find(req.query);
     res.json(scrims);
