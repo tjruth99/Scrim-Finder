@@ -1,0 +1,25 @@
+.find-scrim-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 1em;
+  width: 50%;
+}
+
+.find-input {
+  font-size: 1.2em;
+  width: 100%;
+  margin: 0.2em;
+}
+
+label {
+  font-size: 1em;
+}
+
+button {
+  text-align: center;
+  width: 50%;
+  font-size: 1.1em;
+  margin: auto;
+  margin-top: 0.5em;
+}
