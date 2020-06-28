@@ -1,4 +1,4 @@
-.find-scrim-form {
+.create-scrim-form {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
@@ -6,7 +6,13 @@
   width: 500px;
 }
 
-.find-input {
+.title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.create-input {
   font-size: 1.2em;
   width: 100%;
   margin: 0.2em;

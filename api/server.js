@@ -9,7 +9,7 @@ const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Connected to Database"));
 
-//app.use(express.json());
+app.use(express.json());
 app.use(cors());
 
 const ScrimRouter = require("./routes/scrims");

@@ -10,6 +10,7 @@ const listOfGames = [
 ];
 
 const initialFormData = {
+  teamName: "",
   game: listOfGames[0],
   date: "",
   startTime: "",
@@ -18,7 +19,7 @@ const initialFormData = {
   region: "",
 };
 
-const FindScrimForm = (props) => {
+const CreateScrimForm = (props) => {
   const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (event) => {
@@ -30,25 +31,17 @@ const FindScrimForm = (props) => {
   };
 
   const handleSubmit = (event) => {
-    let settings = "";
-
-    for (const property in formData) {
-      if (formData[property] !== "") {
-        settings = settings.concat(property, "=", formData[property], "&");
-      }
-      console.log(`${property}: ${formData[property]}`);
-    }
-
-    let request = `http://localhost:5000/scrims?${settings}`;
-    console.log(request);
+    let request = `http://localhost:5000/scrims`;
+    console.log(formData);
 
     fetch(request, {
-      method: "GET",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         mode: "cors",
       },
+      body: JSON.stringify(formData),
     })
       .then((response) => {
         return response.json();
@@ -64,13 +57,23 @@ const FindScrimForm = (props) => {
 
   return (
     <>
-      <div class="find-scrim-form">
-        <span className="title">Find a Scrim</span>
+      <div class="create-scrim-form">
+        <span className="title">Post a new scrim</span>
+        <label className="label" for="elo">
+          Team Name:
+        </label>
+        <input
+          className="create-input"
+          type="text"
+          id="teamName"
+          name="teamName"
+          onChange={handleChange}
+        />
         <label className="label" for="game">
           Game:
         </label>
         <select
-          className="find-input"
+          className="create-input"
           id="game"
           name="game"
           onChange={handleChange}
@@ -83,7 +86,7 @@ const FindScrimForm = (props) => {
           Date:
         </label>
         <input
-          className="find-input"
+          className="create-input"
           type="date"
           id="date"
           name="date"
@@ -93,7 +96,7 @@ const FindScrimForm = (props) => {
           Start Time:
         </label>
         <input
-          className="find-input"
+          className="create-input"
           type="time"
           id="startTime"
           name="startTime"
@@ -103,7 +106,7 @@ const FindScrimForm = (props) => {
           End Time:
         </label>
         <input
-          className="find-input"
+          className="create-input"
           type="time"
           id="endTime"
           name="endTime"
@@ -113,7 +116,7 @@ const FindScrimForm = (props) => {
           Elo:
         </label>
         <input
-          className="find-input"
+          className="create-input"
           type="text"
           id="elo"
           name="elo"
@@ -123,7 +126,7 @@ const FindScrimForm = (props) => {
           Region:
         </label>
         <input
-          className="find-input"
+          className="create-input"
           type="text"
           id="region"
           name="region"
@@ -137,4 +140,4 @@ const FindScrimForm = (props) => {
   );
 };
 
-export default FindScrimForm;
+export default CreateScrimForm;
