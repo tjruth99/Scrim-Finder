@@ -18,6 +18,11 @@
   margin: 0.2em;
 }
 
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
 label {
   font-size: 1em;
 }
