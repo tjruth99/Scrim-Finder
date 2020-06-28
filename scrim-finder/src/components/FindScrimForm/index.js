@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import "./style.css";
 
+const listOfGames = [
+  "Overwatch",
+  "Valorant",
+  "CS:GO",
+  "League Of Legends",
+  "Dota 2",
+];
+
 const initialFormData = {
-  game: "",
+  game: listOfGames[0],
   date: "",
   startTime: "",
   endTime: "",
@@ -22,7 +30,36 @@ const FindScrimForm = (props) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(formData);
+    let settings = "";
+
+    for (const property in formData) {
+      if (formData[property] !== "") {
+        settings = settings.concat(property, "=", formData[property], "&");
+      }
+      console.log(`${property}: ${formData[property]}`);
+    }
+
+    let request = `http://localhost:5000/scrims?${settings}`;
+    console.log(request);
+
+    fetch(request, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "cors",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Server Timeout");
+      });
   };
 
   return (
@@ -37,11 +74,9 @@ const FindScrimForm = (props) => {
           name="game"
           onChange={handleChange}
         >
-          <option>Overwatch</option>
-          <option>Valorant</option>
-          <option>CS:GO</option>
-          <option>League Of Legends</option>
-          <option>Dota 2</option>
+          {listOfGames.map((i) => (
+            <option>{i}</option>
+          ))}
         </select>
         <label className="label" for="date">
           Date:

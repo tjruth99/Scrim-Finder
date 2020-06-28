@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 
@@ -8,7 +9,8 @@ const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Connected to Database"));
 
-app.use(express.json());
+//app.use(express.json());
+app.use(cors());
 
 const ScrimRouter = require("./routes/scrims");
 app.use("/scrims", ScrimRouter);
