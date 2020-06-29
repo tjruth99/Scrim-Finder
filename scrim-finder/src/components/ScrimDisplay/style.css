@@ -1,0 +1,17 @@
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+}
+
+.card {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  border: 1px solid blue;
+  font-size: 1.5em;
+  margin: 0.2em;
+}

@@ -3,6 +3,7 @@ import "./App.css";
 
 import FindScrimForm from "./components/FindScrimForm";
 import CreateScrimForm from "./components/CreateScrimForm";
+import ScrimDisplay from "./components/ScrimDisplay";
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
       <CreateScrimForm />
       <br />
       <FindScrimForm />
+      <br />
+      <ScrimDisplay />
     </div>
   );
 }
