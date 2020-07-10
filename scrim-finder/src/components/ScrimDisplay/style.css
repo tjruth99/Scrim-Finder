@@ -7,11 +7,46 @@
 }
 
 .card {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: baseline;
-  justify-content: space-between;
-  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "game team-name date elo"
+    "game team-name time region";
+  height: 4em;
+  border: 1px solid #001b66;
+  background-color: #ffe19c;
   font-size: 1.5em;
+  border-radius: 25px;
+  text-align: center;
   margin: 0.2em;
+}
+
+.game {
+  grid-area: game;
+}
+
+.team-name {
+  grid-area: team-name;
+}
+
+.date {
+  grid-area: date;
+}
+
+.time {
+  grid-area: time;
+}
+
+.elo {
+  grid-area: elo;
+}
+
+.region {
+  grid-area: region;
+}
+
+.descriptor {
+  font-size: 0.75em;
+  color: grey;
 }

@@ -21,6 +21,8 @@ const initialFormData = {
 const FindScrimForm = (props) => {
   const [formData, updateFormData] = useState(initialFormData);
 
+  console.log("FindScrim Data", props.data);
+
   const handleChange = (event) => {
     updateFormData({
       ...formData,
@@ -30,36 +32,7 @@ const FindScrimForm = (props) => {
   };
 
   const handleSubmit = (event) => {
-    let settings = "";
-
-    for (const property in formData) {
-      if (formData[property] !== "") {
-        settings = settings.concat(property, "=", formData[property], "&");
-      }
-      console.log(`${property}: ${formData[property]}`);
-    }
-
-    let request = `http://localhost:5000/scrims?${settings}`;
-    console.log(request);
-
-    fetch(request, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        mode: "cors",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Server Timeout");
-      });
+    props.callback(formData);
   };
 
   return (

@@ -7,13 +7,25 @@ const ScrimCard = (props) => {
     <>
       <div className="card">
         <div className="game">{props.info.game}</div>
-        <div className="team-name">{props.info.teamName}</div>
-        <div className="date">{props.info.date}</div>
+        <div className="team-name">
+          <span className="descriptor">Team Name: </span>
+          {props.info.teamName}
+        </div>
+        <div className="date">
+          <span className="descriptor">Date: </span>
+          {props.info.date}
+        </div>
         <div className="time">
           {props.info.startTime}-{props.info.endTime}
         </div>
-        <div className="elo">{props.info.elo}</div>
-        <div className="region">{props.info.region}</div>
+        <div className="elo">
+          <span className="descriptor">Elo: </span>
+          {props.info.elo}
+        </div>
+        <div className="region">
+          <span className="descriptor">Region: </span>
+          {props.info.region}
+        </div>
       </div>
     </>
   );
@@ -26,7 +38,17 @@ const ScrimDisplay = (props) => {
   console.log(scrimData);
 
   const getScrimData = () => {
-    let request = `http://localhost:5000/scrims`;
+    var settings = "";
+
+    for (const property in props.data) {
+      if (props.data[property] !== "") {
+        settings = settings.concat(property, "=", props.data[property], "&");
+      }
+      console.log(`${property}: ${props.data[property]}`);
+    }
+
+    let request = `http://localhost:5000/scrims?${settings}`;
+    console.log(request);
 
     fetch(request, {
       method: "GET",
@@ -50,7 +72,7 @@ const ScrimDisplay = (props) => {
 
   useEffect(() => {
     getScrimData();
-  }, [refresh]);
+  });
 
   return (
     <>
