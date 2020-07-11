@@ -5,16 +5,8 @@ import FindScrimForm from "./components/FindScrimForm";
 import CreateScrimForm from "./components/CreateScrimForm";
 import ScrimDisplay from "./components/ScrimDisplay";
 
-const listOfGames = [
-  "Overwatch",
-  "Valorant",
-  "CS:GO",
-  "League Of Legends",
-  "Dota 2",
-];
-
 const initialFormData = {
-  game: listOfGames[0],
+  game: "",
   date: "",
   startTime: "",
   endTime: "",

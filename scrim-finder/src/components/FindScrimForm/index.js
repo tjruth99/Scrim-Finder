@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 
 const listOfGames = [
+  "All Games",
   "Overwatch",
   "Valorant",
   "CS:GO",
@@ -10,7 +11,7 @@ const listOfGames = [
 ];
 
 const initialFormData = {
-  game: listOfGames[0],
+  game: "",
   date: "",
   startTime: "",
   endTime: "",
@@ -21,13 +22,16 @@ const initialFormData = {
 const FindScrimForm = (props) => {
   const [formData, updateFormData] = useState(initialFormData);
 
-  console.log("FindScrim Data", props.data);
-
   const handleChange = (event) => {
+    let value =
+      event.target.name === "game" && event.target.value === listOfGames[0]
+        ? ""
+        : event.target.value;
+
     updateFormData({
       ...formData,
 
-      [event.target.name]: event.target.value.trim(),
+      [event.target.name]: value,
     });
   };
 

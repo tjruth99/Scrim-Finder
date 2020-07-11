@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 
 const ScrimCard = (props) => {
-  console.log(props);
   return (
     <>
       <div className="card">
@@ -33,9 +32,6 @@ const ScrimCard = (props) => {
 
 const ScrimDisplay = (props) => {
   const [scrimData, updateScrimData] = useState([]);
-  const [refresh, updateRefresh] = useState(false);
-
-  console.log(scrimData);
 
   const getScrimData = () => {
     var settings = "";
@@ -72,7 +68,7 @@ const ScrimDisplay = (props) => {
 
   useEffect(() => {
     getScrimData();
-  });
+  }, [props.data]);
 
   return (
     <>
