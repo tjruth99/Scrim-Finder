@@ -58,7 +58,11 @@ const ScrimDisplay = (props) => {
         return response.json();
       })
       .then((data) => {
-        updateScrimData(data);
+        if (Object.keys(data).length === 0) {
+          updateScrimData([]);
+        } else {
+          updateScrimData(data);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -69,6 +73,8 @@ const ScrimDisplay = (props) => {
   useEffect(() => {
     getScrimData();
   }, [props.data]);
+
+  console.log(scrimData);
 
   return (
     <>

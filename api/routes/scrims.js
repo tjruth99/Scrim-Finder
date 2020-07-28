@@ -6,8 +6,25 @@ const Scrim = require("../models/scrims.models");
 // Get data on every scrim in database
 router.get("/", async (req, res) => {
   try {
-    const scrims = await Scrim.find(req.query);
-    res.json(scrims);
+    let params = req.query;
+    let start = "00:00";
+    let end = "24:00";
+
+    if ("startTime" in params || "endTime" in params) {
+      start = params.startTime;
+      end = params.endTime;
+
+      delete params.startTime;
+      delete params.endTime;
+    }
+
+    const scrims = await Scrim.find(params);
+
+    let filteredScrims = scrims.filter(
+      (data) => start <= data.startTime && end >= data.endTime
+    );
+
+    res.json(filteredScrims);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -90,6 +107,24 @@ async function getScrimByID(req, res, next) {
 
   res.scrim = scrim;
   next();
+}
+
+async function verifyTime(params) {
+  console.log("params", params);
+
+  if ("startTime" in params && "endTime" in params) {
+    let start = params.startTime;
+    let end = params.endTime;
+
+    delete params.startTime;
+    delete params.endTime;
+  }
+
+  console.log("params", params);
+
+  const scrims = await Scrim.find(params);
+
+  return scrims;
 }
 
 module.exports = router;
