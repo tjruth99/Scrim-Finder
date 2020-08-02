@@ -45,6 +45,7 @@ router.post("/", async (req, res) => {
     endTime: req.body.endTime,
     elo: req.body.elo,
     region: req.body.region,
+    discord: req.body.discord,
   });
 
   try {
@@ -81,6 +82,9 @@ router.patch("/:id", getScrimByID, async (req, res) => {
   }
   if (req.body.region != null) {
     res.scrim.region = req.body.region;
+  }
+  if (req.body.discord != null) {
+    res.scrim.discord = req.body.discord;
   }
 
   try {

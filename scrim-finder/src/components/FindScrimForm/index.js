@@ -87,6 +87,7 @@ const initialFormData = {
   endTime: "",
   elo: "",
   region: "",
+  discord: "",
 };
 
 const FindScrimForm = (props) => {
@@ -188,6 +189,16 @@ const FindScrimForm = (props) => {
           type="text"
           id="region"
           name="region"
+          onChange={handleChange}
+        />
+        <label className="label" for="region">
+          Discord ID:
+        </label>
+        <input
+          className="create-input"
+          type="text"
+          id="discord"
+          name="discord"
           onChange={handleChange}
         />
         <button className="submit" onClick={handleSubmit}>

@@ -35,6 +35,10 @@ const ScrimSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  discord: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Scrim", ScrimSchema);

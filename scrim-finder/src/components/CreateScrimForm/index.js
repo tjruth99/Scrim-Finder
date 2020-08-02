@@ -17,6 +17,7 @@ const initialFormData = {
   endTime: "",
   elo: "",
   region: "",
+  discord: "",
 };
 
 const OverwatchElo = [
@@ -96,6 +97,7 @@ const initialErrorData = {
   endTime: "End time must be after start time",
   elo: "Must enter an elo",
   region: "Must enter a region",
+  discord: "Must enter a valid Discord ID",
 };
 
 const CreateScrimForm = (props) => {
@@ -105,6 +107,8 @@ const CreateScrimForm = (props) => {
   let d = new Date();
 
   const verifyFormData = () => {
+    console.log(formData);
+
     let error = { ...initialErrorData };
     let numOfErrors = 6;
 
@@ -153,6 +157,11 @@ const CreateScrimForm = (props) => {
 
     if (formData.region !== "") {
       error.region = "";
+      numOfErrors -= 1;
+    }
+
+    if (formData.discord !== "") {
+      error.discord = "";
       numOfErrors -= 1;
     }
 
@@ -207,7 +216,7 @@ const CreateScrimForm = (props) => {
   return (
     <>
       <div class="create-scrim-form">
-        <span className="title">Post a new scrim</span>
+        <span className="title">Post a New Scrim</span>
         <label className="label" for="elo">
           Team Name:
         </label>
@@ -291,6 +300,17 @@ const CreateScrimForm = (props) => {
           onChange={handleChange}
         />
         <span className="error">{errorData.region}</span>
+        <label className="label" for="region">
+          Discord ID:
+        </label>
+        <input
+          className="create-input"
+          type="text"
+          id="discord"
+          name="discord"
+          onChange={handleChange}
+        />
+        <span className="error">{errorData.discord}</span>
         <button className="submit" onClick={handleSubmit}>
           Submit
         </button>

@@ -12,7 +12,7 @@
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "game team-name date elo"
-    "game team-name time region";
+    "game discord time region";
   height: 4em;
   border: 1px solid #001b66;
   background-color: #ffe19c;
@@ -28,6 +28,10 @@
 
 .team-name {
   grid-area: team-name;
+}
+
+.discord {
+  grid-area: discord;
 }
 
 .date {

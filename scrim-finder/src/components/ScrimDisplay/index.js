@@ -10,6 +10,10 @@ const ScrimCard = (props) => {
           <span className="descriptor">Team Name: </span>
           {props.info.teamName}
         </div>
+        <div className="discord">
+          <span className="descriptor">Discord ID: </span>
+          {props.info.discord}
+        </div>
         <div className="date">
           <span className="descriptor">Date: </span>
           {props.info.date}
