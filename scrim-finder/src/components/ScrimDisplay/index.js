@@ -44,7 +44,7 @@ const ScrimDisplay = (props) => {
       if (props.data[property] !== "") {
         settings = settings.concat(property, "=", props.data[property], "&");
       }
-      console.log(`${property}: ${props.data[property]}`);
+      //console.log(`${property}: ${props.data[property]}`);
     }
 
     let request = `http://localhost:5000/scrims?${settings}`;
@@ -83,6 +83,7 @@ const ScrimDisplay = (props) => {
   return (
     <>
       <div className="container">
+        <button onClick={getScrimData}>Refresh</button>
         {scrimData.map((i) => (
           <ScrimCard info={i} />
         ))}

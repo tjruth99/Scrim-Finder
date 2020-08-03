@@ -37,7 +37,7 @@ router.get("/:id", getScrimByID, (req, res) => {
 
 // Post a new scrim to the database
 router.post("/", async (req, res) => {
-  const newScrimData = new Scrim({
+  const data = {
     teamName: req.body.teamName,
     game: req.body.game,
     date: req.body.date,
@@ -46,11 +46,17 @@ router.post("/", async (req, res) => {
     elo: req.body.elo,
     region: req.body.region,
     discord: req.body.discord,
-  });
+  };
 
   try {
-    const scrim = await newScrimData.save();
-    res.status(201).json(scrim);
+    let search = await Scrim.find(data);
+
+    if (search.length === 0) {
+      const scrim = await Scrim(data).save();
+      res.status(201).json(scrim);
+    } else {
+      res.status(409).json({ message: "Duplicate Entry" });
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

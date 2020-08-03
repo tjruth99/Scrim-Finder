@@ -109,12 +109,14 @@ const CreateScrimForm = (props) => {
   const verifyFormData = () => {
     console.log(formData);
 
+    const discordRegex = /([a-zA-Z0-9])+#([0-9])+/;
+
     let error = { ...initialErrorData };
     let numOfErrors = 6;
 
     let year = d.getFullYear();
     let month = (d.getMonth() + 1).toString().padStart(2, "0");
-    let date = d.getDate();
+    let date = (d.getDate() + 1).toString().padStart(2, "0");
 
     let fullDate = `${year}-${month}-${date}`;
 
@@ -160,7 +162,10 @@ const CreateScrimForm = (props) => {
       numOfErrors -= 1;
     }
 
-    if (formData.discord !== "") {
+    if (
+      formData.discord !== "" &&
+      formData.discord.match(discordRegex) != null
+    ) {
       error.discord = "";
       numOfErrors -= 1;
     }
@@ -193,6 +198,10 @@ const CreateScrimForm = (props) => {
         body: JSON.stringify(formData),
       })
         .then((response) => {
+          console.log(response.status);
+          if (response.status == 409) {
+            alert("Error", response.json);
+          }
           return response.json();
         })
         .then((data) => {
