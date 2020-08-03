@@ -123,7 +123,7 @@ const FindScrimForm = (props) => {
 
   return (
     <>
-      <div class="find-scrim-form">
+      <div class="form-card">
         <span className="title">Find a Scrim</span>
         <label className="label" for="game">
           Game:

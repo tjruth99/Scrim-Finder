@@ -23,9 +23,10 @@ function App() {
 
   return (
     <div className="App">
-      <CreateScrimForm />
-      <br />
-      <FindScrimForm data={searchData} callback={findScrimCallback} />
+      <div className="scrim-forms">
+        <CreateScrimForm />
+        <FindScrimForm data={searchData} callback={findScrimCallback} />
+      </div>
       <br />
       <ScrimDisplay data={searchData} />
     </div>

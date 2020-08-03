@@ -1,0 +1,66 @@
+:root {
+  --text: #dce6eb;
+  --primary: #416788;
+  --secondary: #f96e46;
+  --background: #0f1108;
+
+  color: var(--text);
+}
+
+.App {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: var(--background);
+}
+
+.scrim-forms {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  border: 5px solid var(--primary);
+  border-radius: 10px;
+  width: 60%;
+  padding: 1em;
+  background-color: var(--background);
+  margin: auto;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--light);
+  border: 5px solid var(--primary);
+  border-radius: 10px;
+  padding: 1em;
+  margin: auto;
+  width: 400px;
+  min-height: 550px;
+}
+
+button {
+  background-color: var(--background);
+  color: var(--text);
+  border: 5px solid var(--primary);
+  border-radius: 10px;
+}
+
+.form-card > input {
+  background-color: var(--background);
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+
+.form-card > select {
+  background-color: var(--background);
+  border: 1px solid var(--text);
+  color: var(--text);
+}

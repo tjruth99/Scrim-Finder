@@ -112,7 +112,7 @@ const CreateScrimForm = (props) => {
     const discordRegex = /([a-zA-Z0-9])+#([0-9])+/;
 
     let error = { ...initialErrorData };
-    let numOfErrors = 6;
+    let numOfErrors = 7;
 
     let year = d.getFullYear();
     let month = (d.getMonth() + 1).toString().padStart(2, "0");
@@ -186,7 +186,7 @@ const CreateScrimForm = (props) => {
   const handleSubmit = (event) => {
     if (verifyFormData()) {
       let request = `http://localhost:5000/scrims`;
-      console.log(formData);
+      console.log("sending", formData);
 
       fetch(request, {
         method: "POST",
@@ -200,7 +200,7 @@ const CreateScrimForm = (props) => {
         .then((response) => {
           console.log(response.status);
           if (response.status == 409) {
-            alert("Error", response.json);
+            alert(`Error: ${response.json().message}`);
           }
           return response.json();
         })
@@ -224,7 +224,7 @@ const CreateScrimForm = (props) => {
 
   return (
     <>
-      <div class="create-scrim-form">
+      <div class="form-card">
         <span className="title">Post a New Scrim</span>
         <label className="label" for="elo">
           Team Name:
