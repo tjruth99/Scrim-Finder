@@ -11,6 +11,7 @@ const listOfGames = [
 ];
 
 const OverwatchElo = [
+  "All",
   "Bronze",
   "Silver",
   "Gold",
@@ -21,6 +22,7 @@ const OverwatchElo = [
 ];
 
 const ValorantElo = [
+  "All",
   "Iron 1",
   "Iron 2",
   "Iron 3",
@@ -46,6 +48,7 @@ const ValorantElo = [
 ];
 
 const CSGOElo = [
+  "All",
   "Silver I",
   "Silver II",
   "Silver III",
@@ -67,6 +70,7 @@ const CSGOElo = [
 ];
 
 const LeagueOfLegendsElo = [
+  "All",
   "Iron",
   "Bronze",
   "Silver",
@@ -94,10 +98,23 @@ const FindScrimForm = (props) => {
   const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (event) => {
-    let value =
-      event.target.name === "game" && event.target.value === listOfGames[0]
-        ? ""
-        : event.target.value;
+    let value = event.target.value;
+
+    if (event.target.name === "game" && event.target.value === listOfGames[0]) {
+      value = "";
+      updateFormData({
+        ...formData,
+
+        elo: "",
+        [event.target.name]: value,
+      });
+
+      return;
+    }
+
+    if (event.target.name === "elo" && event.target.value === "All") {
+      value = "";
+    }
 
     updateFormData({
       ...formData,
@@ -112,7 +129,7 @@ const FindScrimForm = (props) => {
 
   const getEloRankings = () => {
     if (formData.game === "") {
-      return [""];
+      return ["All"];
     }
     for (let i = 0; i < listOfGames.length; i++) {
       if (listOfGames[i + 1] === formData.game) {
