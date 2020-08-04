@@ -23,6 +23,17 @@
   margin: 0.2em;
 }
 
+.create-input:hover {
+  transition: 250ms;
+  background-color: var(--text);
+  color: var(--background);
+}
+
+.create-input:focus {
+  background-color: var(--text);
+  color: var(--background);
+}
+
 .error {
   color: red;
   font-size: 0.9em;

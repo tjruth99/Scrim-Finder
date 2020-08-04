@@ -2,6 +2,60 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 
 const ScrimCard = (props) => {
+  const [newTime, updateNewTime] = useState({
+    start: "",
+    end: "",
+  });
+
+  const get12HourTime = () => {
+    let startHour = parseInt(props.info.startTime.substring(0, 2));
+    let endHour = parseInt(props.info.endTime.substring(0, 2));
+    let startPeriod, endPeriod;
+
+    if (startHour > 12) {
+      startHour = startHour % 12;
+      startPeriod = "PM";
+    } else if (startHour == 0) {
+      startHour = 12;
+      startPeriod = "AM";
+    } else {
+      startPeriod = "AM";
+    }
+
+    if (endHour > 12) {
+      endHour = endHour % 12;
+      endPeriod = "PM";
+    } else if (endHour == 0) {
+      endHour = 12;
+      endPeriod = "AM";
+    } else {
+      endPeriod = "AM";
+    }
+
+    let start =
+      startHour.toString() +
+      ":" +
+      props.info.startTime.substring(3) +
+      " " +
+      startPeriod;
+
+    let end =
+      endHour.toString() +
+      ":" +
+      props.info.endTime.substring(3) +
+      " " +
+      endPeriod;
+
+    updateNewTime({
+      start: start,
+      end: end,
+    });
+  };
+
+  useEffect(() => {
+    get12HourTime();
+  }, [props.data]);
+
   return (
     <>
       <div className="card">
@@ -14,12 +68,14 @@ const ScrimCard = (props) => {
           <span className="descriptor">Discord ID: </span>
           {props.info.discord}
         </div>
-        <div className="date">
-          <span className="descriptor">Date: </span>
-          {props.info.date}
-        </div>
-        <div className="time">
-          {props.info.startTime}-{props.info.endTime}
+        <div className="date-time">
+          <div>
+            <span className="descriptor">Date: </span>
+            {props.info.date}
+          </div>
+          <div>
+            {newTime.start}-{newTime.end}
+          </div>
         </div>
         <div className="elo">
           <span className="descriptor">Elo: </span>
@@ -83,7 +139,9 @@ const ScrimDisplay = (props) => {
   return (
     <>
       <div className="container">
-        <button onClick={getScrimData}>Refresh</button>
+        <button className="refresh-button" onClick={getScrimData}>
+          Refresh
+        </button>
         {scrimData.map((i) => (
           <ScrimCard info={i} />
         ))}

@@ -13,6 +13,7 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -51,6 +52,12 @@ button {
   color: var(--text);
   border: 5px solid var(--primary);
   border-radius: 10px;
+}
+
+button:hover {
+  transition: 500ms;
+  background-color: var(--text);
+  color: var(--background);
 }
 
 .form-card > input {

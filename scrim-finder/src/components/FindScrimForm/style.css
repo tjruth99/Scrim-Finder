@@ -4,6 +4,17 @@
   margin: 0.2em;
 }
 
+.find-input:hover {
+  transition: 250ms;
+  background-color: var(--text);
+  color: var(--background);
+}
+
+.find-input:focus {
+  background-color: var(--text);
+  color: var(--background);
+}
+
 label {
   font-size: 1em;
 }

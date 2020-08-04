@@ -1,5 +1,6 @@
 .container {
-  width: 80%;
+  --grey: #646464;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -8,14 +9,13 @@
 
 .card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 3fr 2fr 2fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    "game team-name date elo"
-    "game discord time region";
-  height: 4em;
+    "game team-name date-time elo"
+    "game discord date-time region";
+  min-height: 4em;
   border: 3px solid var(--secondary);
-  background-color: var(--light);
   font-size: 1.5em;
   border-radius: 25px;
   text-align: center;
@@ -24,22 +24,29 @@
 
 .game {
   grid-area: game;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.5em;
+  border-right: 1px solid var(--grey);
 }
 
 .team-name {
   grid-area: team-name;
+  border-right: 1px solid var(--grey);
 }
 
 .discord {
   grid-area: discord;
+  border-right: 1px solid var(--grey);
 }
 
-.date {
-  grid-area: date;
-}
-
-.time {
-  grid-area: time;
+.date-time {
+  grid-area: date-time;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid var(--grey);
 }
 
 .elo {
@@ -50,7 +57,11 @@
   grid-area: region;
 }
 
+.refresh-button {
+  border: 5px solid var(--primary);
+}
+
 .descriptor {
   font-size: 0.75em;
-  color: grey;
+  color: var(--grey);
 }
