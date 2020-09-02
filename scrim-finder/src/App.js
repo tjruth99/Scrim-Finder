@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 import "./App.css";
 
 import FindScrimForm from "./components/FindScrimForm";
@@ -16,6 +17,7 @@ const initialFormData = {
 
 function App() {
   const [searchData, updateSearchData] = useState(initialFormData);
+  const [showForms, updateShowForms] = useState(false);
 
   const findScrimCallback = (data) => {
     updateSearchData(data);
@@ -23,10 +25,20 @@ function App() {
 
   return (
     <div className="App">
-      <div className="scrim-forms">
-        <CreateScrimForm />
-        <FindScrimForm data={searchData} callback={findScrimCallback} />
-      </div>
+      <button onClick={() => updateShowForms(!showForms)}>
+        Search / Create
+      </button>
+      <CSSTransition
+        in={showForms}
+        timeout={300}
+        classNames="form-display"
+        unmountOnExit
+      >
+        <div className="scrim-forms">
+          <CreateScrimForm />
+          <FindScrimForm data={searchData} callback={findScrimCallback} />
+        </div>
+      </CSSTransition>
       <br />
       <ScrimDisplay data={searchData} />
     </div>
