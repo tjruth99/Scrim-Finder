@@ -25,7 +25,11 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => updateShowForms(!showForms)}>
+      <div className="header"><div className="title">Scrim Finder</div> <div className="header-links"></div></div>
+      <button
+        className="show-forms-button"
+        onClick={() => updateShowForms(!showForms)}
+      >
         Search / Create
       </button>
       <CSSTransition
@@ -41,6 +45,7 @@ function App() {
       </CSSTransition>
       <br />
       <ScrimDisplay data={searchData} />
+      <div className="footer"></div>
     </div>
   );
 }
