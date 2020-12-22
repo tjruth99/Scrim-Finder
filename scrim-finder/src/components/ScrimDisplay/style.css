@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   margin: auto;
+  margin-top: 0;
 }
 
 .card {
@@ -16,6 +17,7 @@
     "game discord date-time region";
   min-height: 4em;
   border: 3px solid var(--secondary);
+  background-color: black;
   font-size: 1.5em;
   border-radius: 25px;
   text-align: center;
@@ -58,7 +60,32 @@
 }
 
 .refresh-button {
-  border: 5px solid var(--primary);
+  border: 3px solid var(--primary);
+}
+
+.sort-list{
+  border: 3px solid var(--primary);
+  border-radius: 25px;
+  padding: auto;
+  align-self: center;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.sort-text{
+  width: 5vw;
+  margin: 20px;
+  align-self: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sort-button{
+  width: 5vw;
+  margin: 20px;
 }
 
 .descriptor {

@@ -130,9 +130,19 @@ const ScrimDisplay = (props) => {
       });
   };
 
+  const sortScrimData = property => () => {
+    let sortedData = [...scrimData];
+    updateScrimData(sortedData.sort((a,b) => (a[property] >= b[property]) ? 1 : -1));
+  }
+
   useEffect(() => {
     getScrimData();
   }, [props.data]);
+
+  useEffect(() => {
+    
+  }, [scrimData]);
+  
 
   console.log(scrimData);
 
@@ -142,6 +152,13 @@ const ScrimDisplay = (props) => {
         <button className="refresh-button" onClick={getScrimData}>
           Refresh
         </button>
+        <div className="sort-list">
+          <div className="sort-text">Sort by:</div>
+          <button className="sort-button" id="game-sort-button" onClick={sortScrimData("game")}>Game</button> 
+          <button className="sort-button" id="team-name-sort-button" onClick={sortScrimData("teamName")}>Team Name</button>
+          <button className="sort-button" id="date-sort-button" onClick={sortScrimData("date")}>Date</button>
+          <button className="sort-button" id="start-time-sort-button" onClick={sortScrimData("startTime")}>Start Time</button>
+        </div>
         {scrimData.map((i) => (
           <ScrimCard info={i} />
         ))}
