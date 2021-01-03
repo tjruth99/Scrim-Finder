@@ -158,8 +158,9 @@ const ScrimDisplay = (props) => {
           <button className="sort-button" id="team-name-sort-button" onClick={sortScrimData("teamName")}>Team Name</button>
           <button className="sort-button" id="date-sort-button" onClick={sortScrimData("date")}>Date</button>
           <button className="sort-button" id="start-time-sort-button" onClick={sortScrimData("startTime")}>Start Time</button>
+          <button className="sort-button" id="elo-sort-button" onClick={sortScrimData("elo")}>Elo</button>
         </div>
-        {scrimData.map((i) => (
+        {scrimData.length == 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
           <ScrimCard info={i} />
         ))}
       </div>
