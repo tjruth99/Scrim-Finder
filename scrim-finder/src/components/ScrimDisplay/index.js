@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 
+import OverwatchLogo from "./icons/overwatch-icon.png";
+import ValorantLogo from "./icons/valorant-icon.png";
+import LeagueLogo from "./icons/lol-icon.png";
+import CSLogo from "./icons/cs-icon.png";
+import DotaLogo from "./icons/dota-icon.png";
+
 const ScrimCard = (props) => {
   const [newTime, updateNewTime] = useState({
     start: "",
@@ -52,6 +58,22 @@ const ScrimCard = (props) => {
     });
   };
 
+
+  const GameToIcon = (name) => {
+    switch(name){
+      case "Overwatch":
+        return OverwatchLogo;
+      case "Valorant":
+        return ValorantLogo;
+      case "CS:GO":
+          return CSLogo;
+      case "League Of Legends":
+        return LeagueLogo;
+      case "Dota 2":
+        return DotaLogo;
+    }
+  };
+
   useEffect(() => {
     get12HourTime();
   }, [props.data]);
@@ -59,7 +81,7 @@ const ScrimCard = (props) => {
   return (
     <>
       <div className="card">
-        <div className="game">{props.info.game}</div>
+        <div className="game"><img src={GameToIcon(props.info.game)} className="icon" /></div>
         <div className="team-name">
           <span className="descriptor">Team Name: </span>
           {props.info.teamName}

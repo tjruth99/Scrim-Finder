@@ -43,6 +43,12 @@
   border-right: 1px solid var(--grey);
 }
 
+.icon{
+  max-width: 100px;
+  height: auto;
+  margin: auto;
+}
+
 .team-name {
   grid-area: team-name;
   border-right: 1px solid var(--grey);

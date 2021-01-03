@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="header"><div className="title">Scrim Finder</div> <div className="header-links"></div></div>
+      <div className="header"><div className="page-title">Scrim Finder</div> <div className="header-links"></div></div>
       <button
         className="show-forms-button"
         onClick={() => updateShowForms(!showForms)}
