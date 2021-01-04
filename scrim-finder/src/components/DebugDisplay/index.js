@@ -7,11 +7,37 @@ import LeagueLogo from "../../icons/lol-icon.png";
 import CSLogo from "../../icons/cs-icon.png";
 import DotaLogo from "../../icons/dota-icon.png";
 
-const ScrimCard = (props) => {
+const DebugScrimCard = (props) => {
   const [newTime, updateNewTime] = useState({
     start: "",
     end: "",
   });
+
+  const deleteScrim = (id) => {
+    alert(`Deleting ${id}`);
+
+    let request = `http://localhost:5000/scrims/${id}`;
+    console.log(request);
+
+    fetch(request, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "cors",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // Update
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Server Timeout");
+      });
+  };
 
   const get12HourTime = () => {
     let startHour = parseInt(props.info.startTime.substring(0, 2));
@@ -80,7 +106,7 @@ const ScrimCard = (props) => {
 
   return (
     <>
-      <div className="card">
+      <div className="debug-card">
         <div className="game"><img src={GameToIcon(props.info.game)} className="icon" /></div>
         <div className="team-name">
           <span className="descriptor">Team Name: </span>
@@ -107,12 +133,13 @@ const ScrimCard = (props) => {
           <span className="descriptor">Region: </span>
           {props.info.region}
         </div>
+        <div className="debug"><button className="debug-button" onClick={() => deleteScrim(props.info._id)}>Delete</button><button className="debug-button">Edit</button></div>
       </div>
     </>
   );
 };
 
-const ScrimDisplay = (props) => {
+const DebugDisplay = (props) => {
   const [scrimData, updateScrimData] = useState([]);
 
   const getScrimData = () => {
@@ -183,11 +210,11 @@ const ScrimDisplay = (props) => {
           <button className="sort-button" id="elo-sort-button" onClick={sortScrimData("elo")}>Elo</button>
         </div>
         {scrimData.length == 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
-          <ScrimCard info={i} />
+          <DebugScrimCard info={i} />
         ))}
       </div>
     </>
   );
 };
 
-export default ScrimDisplay;
+export default DebugDisplay;

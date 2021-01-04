@@ -122,3 +122,9 @@ button:hover {
   border: 1px solid var(--text);
   color: var(--text);
 }
+
+.enter-debug-button {
+  float: right;
+  width: auto;
+  opacity: 25%;
+}
