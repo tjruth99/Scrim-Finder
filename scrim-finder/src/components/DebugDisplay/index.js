@@ -28,10 +28,12 @@ const DebugScrimCard = (props) => {
       },
     })
       .then((response) => {
+        props.callback();
         return response.json();
       })
       .then((data) => {
-        // Update
+        // Callback display to show updated scrims
+        
       })
       .catch((error) => {
         console.log(error);
@@ -141,6 +143,7 @@ const DebugScrimCard = (props) => {
 
 const DebugDisplay = (props) => {
   const [scrimData, updateScrimData] = useState([]);
+  const [refreshData, updateRefreshData] = useState(false);
 
   const getScrimData = () => {
     var settings = "";
@@ -171,6 +174,7 @@ const DebugDisplay = (props) => {
           updateScrimData([]);
         } else {
           updateScrimData(data);
+          updateRefreshData(false);
         }
       })
       .catch((error) => {
@@ -184,6 +188,11 @@ const DebugDisplay = (props) => {
     updateScrimData(sortedData.sort((a,b) => (a[property] >= b[property]) ? 1 : -1));
   }
 
+  const refreshScrimsOnEdit = () => {
+    console.log("Refresh Scrims");
+    updateRefreshData(true);
+  }
+
   useEffect(() => {
     getScrimData();
   }, [props.data]);
@@ -191,6 +200,11 @@ const DebugDisplay = (props) => {
   useEffect(() => {
     
   }, [scrimData]);
+
+  // Refresh scrim data when a scrim gets deleted / edited
+  useEffect(() => {
+    getScrimData();
+  }, [refreshData]);
   
 
   console.log(scrimData);
@@ -210,7 +224,7 @@ const DebugDisplay = (props) => {
           <button className="sort-button" id="elo-sort-button" onClick={sortScrimData("elo")}>Elo</button>
         </div>
         {scrimData.length == 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
-          <DebugScrimCard info={i} />
+          <DebugScrimCard info={i} callback={refreshScrimsOnEdit}/>
         ))}
       </div>
     </>

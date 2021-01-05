@@ -5,8 +5,7 @@ const listOfGames = [
   "Overwatch",
   "Valorant",
   "CS:GO",
-  "League Of Legends",
-  "Dota 2",
+  "League Of Legends"
 ];
 
 const initialFormData = {
