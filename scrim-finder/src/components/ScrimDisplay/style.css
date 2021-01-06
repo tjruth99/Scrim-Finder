@@ -8,22 +8,6 @@
   margin-top: 0;
 }
 
-.card {
-  display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "game team-name date-time elo"
-    "game discord date-time region";
-  min-height: 4em;
-  border: 3px solid var(--secondary);
-  background-color: black;
-  font-size: 1.5em;
-  border-radius: 25px;
-  text-align: center;
-  margin: 0.2em;
-}
-
 .empty-list-card {
   border: 3px solid var(--secondary);
   background-color: black;
@@ -32,47 +16,6 @@
   text-align: center;
   margin: 1em;
   padding: 1em;
-}
-
-.game {
-  grid-area: game;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 1.5em;
-  border-right: 1px solid var(--grey);
-}
-
-.icon{
-  max-width: 100px;
-  height: auto;
-  margin: auto;
-}
-
-.team-name {
-  grid-area: team-name;
-  border-right: 1px solid var(--grey);
-}
-
-.discord {
-  grid-area: discord;
-  border-right: 1px solid var(--grey);
-}
-
-.date-time {
-  grid-area: date-time;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border-right: 1px solid var(--grey);
-}
-
-.elo {
-  grid-area: elo;
-}
-
-.region {
-  grid-area: region;
 }
 
 .refresh-button {
