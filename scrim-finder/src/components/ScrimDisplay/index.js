@@ -11,11 +11,12 @@ const ScrimDisplay = (props) => {
   const getScrimData = () => {
     var settings = "";
 
-    for (const property in props.data) {
-      if (props.data[property] !== "") {
-        settings = settings.concat(property, "=", props.data[property], "&");
+    // Get each property from search data to create query parameters for api call
+    for (const property in props.searchData) {
+      if (props.searchData[property] !== "") {
+        settings = settings.concat(property, "=", props.searchData[property], "&");
       }
-      //console.log(`${property}: ${props.data[property]}`);
+      //console.log(`${property}: ${props.searchData[property]}`);
     }
 
     let request = `http://localhost:5000/scrims?${settings}`;
@@ -32,12 +33,14 @@ const ScrimDisplay = (props) => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
+      .then((data) => { 
         if (Object.keys(data).length === 0) {
           updateScrimData([]);
         } else {
+          // Set scrimData to be the new list of scrims
           updateScrimData(data);
           updateRefreshData(false);
+          console.log(data);
         }
       })
       .catch((error) => {
@@ -46,38 +49,40 @@ const ScrimDisplay = (props) => {
       });
   };
 
+  // Sort scrim data based on given property
   const sortScrimData = property => () => {
     let sortedData = [...scrimData];
     updateScrimData(sortedData.sort((a,b) => (a[property] >= b[property]) ? 1 : -1));
   }
 
+  // Callback function called inside debug scrim card to refresh the list of scrims when it gets deleted/edited
   const refreshScrimsOnEdit = () => {
     console.log("Refresh Scrims");
     updateRefreshData(true);
   }
 
+  // Update scrim data when search data is updated
   useEffect(() => {
     getScrimData();
-  }, [props.data]);
+  }, [props.searchData]);
 
-  useEffect(() => {
-    
-  }, [scrimData]);
+  useEffect(() => { }, [scrimData]);
 
+  // Refresh scrim data when a new scrim is added from CreateScrimForm
   useEffect(() => {
-    console.log("New scrim added");
-    getScrimData();
-    props.refreshCallback(false);
+    if(props.refresh === true){
+      getScrimData();
+      props.refreshCallback(false);
+    }
   }, [props.refresh]);
 
   // Refresh scrim data when a scrim gets deleted / edited
   useEffect(() => {
-    getScrimData();
+    if(refreshData === true){
+      getScrimData();
+    }
   }, [refreshData]);
   
-
-  console.log(scrimData);
-
   return (
     <>
       <div className="container">
@@ -92,7 +97,7 @@ const ScrimDisplay = (props) => {
           <button className="sort-button" id="start-time-sort-button" onClick={sortScrimData("startTime")}>Start Time</button>
           <button className="sort-button" id="elo-sort-button" onClick={sortScrimData("elo")}>Elo</button>
         </div>
-        {scrimData.length == 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
+        {scrimData.length === 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
           props.isDebug ? <DebugScrimCard info={i} callback={refreshScrimsOnEdit}/> : <ScrimCard info={i} />
         ))}
       </div>

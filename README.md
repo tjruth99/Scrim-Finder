@@ -10,3 +10,4 @@
 - Some Title / Icon / Header
 - Special admin page to edit and delete scrims easily
 - Refactor and reorganize components
+- Confirm delete scrim

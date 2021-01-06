@@ -88,7 +88,8 @@ const LeagueOfLegendsElo = [
 ];
 
 const listOfElo = [OverwatchElo, ValorantElo, CSGOElo, LeagueOfLegendsElo];
-
+ 
+// Error messages for each field
 const initialErrorData = {
   teamName: "Must enter a team name",
   date: "Cannot make a scrim for a previous date",
@@ -105,6 +106,7 @@ const CreateScrimForm = (props) => {
 
   let d = new Date();
 
+  // Verify form data and set any error messages
   const verifyFormData = () => {
     console.log(formData);
 
@@ -174,6 +176,7 @@ const CreateScrimForm = (props) => {
     return numOfErrors === 0;
   };
 
+  // Updates form data when the user updates each field in the form
   const handleChange = (event) => {
     updateFormData({
       ...formData,
@@ -182,6 +185,7 @@ const CreateScrimForm = (props) => {
     });
   };
 
+  // Verify form data and send a new post request to the api with the form data on submit
   const handleSubmit = (event) => {
     if (verifyFormData()) {
       let request = `http://localhost:5000/scrims`;
@@ -198,7 +202,7 @@ const CreateScrimForm = (props) => {
       })
         .then((response) => {
           console.log(response.status);
-          if (response.status == 409) {
+          if (response.status === 409) {
             alert(`Error: ${response.json().message}`);
           }
           return response.json();
@@ -215,6 +219,7 @@ const CreateScrimForm = (props) => {
     }
   };
 
+  // When user switches game, switch the list of elo is displayed
   const getEloRankings = () => {
     for (let i = 0; i < listOfGames.length; i++) {
       if (listOfGames[i] === formData.game) {

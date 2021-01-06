@@ -97,9 +97,11 @@ const initialFormData = {
 const FindScrimForm = (props) => {
   const [formData, updateFormData] = useState(initialFormData);
 
+  // Updates form data when the user updates each field in the form
   const handleChange = (event) => {
     let value = event.target.value;
 
+    // If all games are selected, set elo and game fields to be empty
     if (event.target.name === "game" && event.target.value === listOfGames[0]) {
       value = "";
       updateFormData({
@@ -112,10 +114,12 @@ const FindScrimForm = (props) => {
       return;
     }
 
+    // If all elo is selected, set the form field to be empty
     if (event.target.name === "elo" && event.target.value === "All") {
       value = "";
     }
 
+    // Update the form data with the edited field
     updateFormData({
       ...formData,
 
@@ -123,10 +127,12 @@ const FindScrimForm = (props) => {
     });
   };
 
+  // Send form data to parent with search data
   const handleSubmit = (event) => {
     props.callback(formData);
   };
 
+  // When user switches game, switch the list of elo is displayed
   const getEloRankings = () => {
     if (formData.game === "") {
       return ["All"];

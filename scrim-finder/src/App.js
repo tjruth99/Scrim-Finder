@@ -21,10 +21,12 @@ function App() {
   const [showForms, updateShowForms] = useState(false);
   const [debugMode, updateDebugMode] = useState(false);
 
+  // Callback function to get search data when user searches for a scrim
   const findScrimCallback = (data) => {
     updateSearchData(data);
   };
 
+  // Callback function to refresh display when a scrim is created
   const refreshDataCallBack = (value) => {
     updateRefreshData(value);
   }
@@ -51,7 +53,7 @@ function App() {
       </CSSTransition>
       <br />
       <ScrimDisplay 
-        data={searchData} 
+        searchData={searchData} 
         refresh={refreshData} 
         refreshCallback={refreshDataCallBack}
         isDebug={debugMode}

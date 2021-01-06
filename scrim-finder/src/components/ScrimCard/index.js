@@ -13,6 +13,7 @@ const ScrimCard = (props) => {
     end: "",
   });
 
+  // Convert the time to a readable format
   const get12HourTime = () => {
     let startHour = parseInt(props.info.startTime.substring(0, 2));
     let endHour = parseInt(props.info.endTime.substring(0, 2));
@@ -21,7 +22,7 @@ const ScrimCard = (props) => {
     if (startHour > 12) {
       startHour = startHour % 12;
       startPeriod = "PM";
-    } else if (startHour == 0) {
+    } else if (startHour === 0) {
       startHour = 12;
       startPeriod = "AM";
     } else {
@@ -31,7 +32,7 @@ const ScrimCard = (props) => {
     if (endHour > 12) {
       endHour = endHour % 12;
       endPeriod = "PM";
-    } else if (endHour == 0) {
+    } else if (endHour === 0) {
       endHour = 12;
       endPeriod = "AM";
     } else {
@@ -58,7 +59,7 @@ const ScrimCard = (props) => {
     });
   };
 
-
+  // Get the icon for each game
   const GameToIcon = (name) => {
     switch(name){
       case "Overwatch":
@@ -71,9 +72,12 @@ const ScrimCard = (props) => {
         return LeagueLogo;
       case "Dota 2":
         return DotaLogo;
+      default:
+        return OverwatchLogo;
     }
   };
 
+  // Convert the time to a readable format when the component mounts
   useEffect(() => {
     get12HourTime();
   }, [props.data]);
@@ -81,7 +85,7 @@ const ScrimCard = (props) => {
   return (
     <>
       <div className="card">
-        <div className="game"><img src={GameToIcon(props.info.game)} className="icon" /></div>
+        <div className="game"><img src={GameToIcon(props.info.game)} alt={props.info.game} className="icon" /></div>
         <div className="team-name">
           <span className="descriptor">Team Name: </span>
           {props.info.teamName}
