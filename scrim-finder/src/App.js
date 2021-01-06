@@ -18,12 +18,17 @@ const initialFormData = {
 
 function App() {
   const [searchData, updateSearchData] = useState(initialFormData);
+  const [refreshData, updateRefreshData] = useState(false);
   const [showForms, updateShowForms] = useState(false);
   const [debugMode, updateDebugMode] = useState(false);
 
   const findScrimCallback = (data) => {
     updateSearchData(data);
   };
+
+  const refreshDataCallBack = (value) => {
+    updateRefreshData(value);
+  }
 
   return (
     <div className="App">
@@ -41,12 +46,12 @@ function App() {
         unmountOnExit
       >
         <div className="scrim-forms">
-          <CreateScrimForm />
+          <CreateScrimForm refreshCallback={refreshDataCallBack}/>
           <FindScrimForm data={searchData} callback={findScrimCallback} />
         </div>
       </CSSTransition>
       <br />
-      {debugMode ? <DebugDisplay data={searchData} /> : <ScrimDisplay data={searchData} />}
+      {debugMode ? <DebugDisplay data={searchData} refresh={refreshData} refreshCallback={refreshDataCallBack}/> : <ScrimDisplay data={searchData} refresh={refreshData} refreshCallback={refreshDataCallBack}/>}
       <div className="footer"><button className="enter-debug-button" onClick={() => updateDebugMode(!debugMode)}>Enter Debug Mode</button></div>
     </div>
   );

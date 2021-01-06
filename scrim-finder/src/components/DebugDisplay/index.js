@@ -28,12 +28,11 @@ const DebugScrimCard = (props) => {
       },
     })
       .then((response) => {
-        props.callback();
         return response.json();
       })
       .then((data) => {
         // Callback display to show updated scrims
-        
+        props.callback();
       })
       .catch((error) => {
         console.log(error);

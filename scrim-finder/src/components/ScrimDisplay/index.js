@@ -164,6 +164,12 @@ const ScrimDisplay = (props) => {
   useEffect(() => {
     
   }, [scrimData]);
+
+  useEffect(() => {
+    console.log("New scrim added");
+    getScrimData();
+    props.refreshCallback(false);
+  }, [props.refresh]);
   
 
   console.log(scrimData);

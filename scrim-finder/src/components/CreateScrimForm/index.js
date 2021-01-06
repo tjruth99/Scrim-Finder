@@ -205,6 +205,8 @@ const CreateScrimForm = (props) => {
         })
         .then((data) => {
           console.log(data);
+          // Callback to App.js to refresh scrim display to display newly added scrim
+          props.refreshCallback(true);
         })
         .catch((error) => {
           console.log(error);
