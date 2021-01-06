@@ -140,7 +140,7 @@ const DebugScrimCard = (props) => {
   );
 };
 
-const DebugDisplay = (props) => {
+/*const DebugDisplay = (props) => {
   const [scrimData, updateScrimData] = useState([]);
   const [refreshData, updateRefreshData] = useState(false);
 
@@ -229,5 +229,6 @@ const DebugDisplay = (props) => {
     </>
   );
 };
+*/
 
-export default DebugDisplay;
+export default DebugScrimCard;

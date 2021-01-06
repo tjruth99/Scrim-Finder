@@ -5,7 +5,6 @@ import "./App.css";
 import FindScrimForm from "./components/FindScrimForm";
 import CreateScrimForm from "./components/CreateScrimForm";
 import ScrimDisplay from "./components/ScrimDisplay";
-import DebugDisplay from "./components/DebugDisplay";
 
 const initialFormData = {
   game: "",
@@ -51,8 +50,13 @@ function App() {
         </div>
       </CSSTransition>
       <br />
-      {debugMode ? <DebugDisplay data={searchData} refresh={refreshData} refreshCallback={refreshDataCallBack}/> : <ScrimDisplay data={searchData} refresh={refreshData} refreshCallback={refreshDataCallBack}/>}
-      <div className="footer"><button className="enter-debug-button" onClick={() => updateDebugMode(!debugMode)}>Enter Debug Mode</button></div>
+      <ScrimDisplay 
+        data={searchData} 
+        refresh={refreshData} 
+        refreshCallback={refreshDataCallBack}
+        isDebug={debugMode}
+      />
+      <div className="footer"><button className="enter-debug-button" onClick={() => updateDebugMode(!debugMode)}>{debugMode ? "Exit Debug Mode" : "Enter Debug Mode"}</button></div>
     </div>
   );
 }

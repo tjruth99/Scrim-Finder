@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 
 import ScrimCard from "../ScrimCard";
+import DebugScrimCard from "../DebugScrimCard";
 
 const ScrimDisplay = (props) => {
   const [scrimData, updateScrimData] = useState([]);
+  const [refreshData, updateRefreshData] = useState(false);
 
   const getScrimData = () => {
     var settings = "";
@@ -35,6 +37,7 @@ const ScrimDisplay = (props) => {
           updateScrimData([]);
         } else {
           updateScrimData(data);
+          updateRefreshData(false);
         }
       })
       .catch((error) => {
@@ -46,6 +49,11 @@ const ScrimDisplay = (props) => {
   const sortScrimData = property => () => {
     let sortedData = [...scrimData];
     updateScrimData(sortedData.sort((a,b) => (a[property] >= b[property]) ? 1 : -1));
+  }
+
+  const refreshScrimsOnEdit = () => {
+    console.log("Refresh Scrims");
+    updateRefreshData(true);
   }
 
   useEffect(() => {
@@ -61,6 +69,11 @@ const ScrimDisplay = (props) => {
     getScrimData();
     props.refreshCallback(false);
   }, [props.refresh]);
+
+  // Refresh scrim data when a scrim gets deleted / edited
+  useEffect(() => {
+    getScrimData();
+  }, [refreshData]);
   
 
   console.log(scrimData);
@@ -80,7 +93,7 @@ const ScrimDisplay = (props) => {
           <button className="sort-button" id="elo-sort-button" onClick={sortScrimData("elo")}>Elo</button>
         </div>
         {scrimData.length == 0 ?  <div className="empty-list-card">No Scrims Found</div> : scrimData.map((i) => (
-          <ScrimCard info={i} />
+          props.isDebug ? <DebugScrimCard info={i} callback={refreshScrimsOnEdit}/> : <ScrimCard info={i} />
         ))}
       </div>
     </>
